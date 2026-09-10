@@ -20,7 +20,7 @@
     main{width:min(1100px,calc(100% - 32px));margin:-28px auto 70px;position:relative;z-index:2}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}.card{background:var(--card);border-radius:24px;padding:24px;border:1px solid rgba(20,91,46,.12);box-shadow:0 14px 40px rgba(32,57,40,.08)}
     .intro{grid-column:span 12}.intro h2,.card h2{margin:.1rem 0 .8rem;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-.03em}.intro p{font-size:1.13rem;line-height:1.65;margin:.6rem 0}.highlight{font-weight:900;color:var(--green)}
     .schedule{grid-column:span 7}.bring{grid-column:span 5}.schedule-list,.plain-list{list-style:none;padding:0;margin:10px 0 0}.schedule-list li,.plain-list li{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed #cdd9d0}.schedule-list li:last-child,.plain-list li:last-child{border-bottom:0}.time{min-width:58px;color:var(--orange);font-weight:1000}.ico{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:#e8f4eb;flex:0 0 auto}
-    .poster{grid-column:span 6}.poster img{width:100%;display:block;border-radius:18px;box-shadow:0 16px 35px rgba(0,0,0,.14)}.party{grid-column:span 6;background:var(--green);color:#fff}.party h2{color:var(--yellow)}.party p,.party li{color:#f5fff6}.party .plain-list li{border-color:rgba(255,255,255,.18)}
+    .poster{grid-column:span 6}.poster img{width:100%;height:auto;object-fit:contain;display:block;border-radius:18px;box-shadow:0 16px 35px rgba(0,0,0,.14)}.party{grid-column:span 6;background:var(--green);color:#fff}.party h2{color:var(--yellow)}.party p,.party li{color:#f5fff6}.party .plain-list li{border-color:rgba(255,255,255,.18)}
     .rsvp{grid-column:span 12;background:linear-gradient(135deg,#fff3be,#ffe59a);border:2px solid #f0c52e}.rsvp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px}.rsvp p{line-height:1.55}.form{display:grid;gap:12px}.field{display:grid;gap:6px}.field label{font-weight:800;font-size:.92rem}.field input,.field select,.field textarea{width:100%;border:1px solid #d8c887;border-radius:12px;padding:12px 13px;font:inherit;background:#fff}.field textarea{min-height:88px;resize:vertical}.share-box{background:#fff;border-radius:18px;padding:18px;border:1px dashed #d5bc55}.share-box pre{white-space:pre-wrap;font-family:inherit;margin:0;color:#27402f;line-height:1.5}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.btn-dark{background:var(--green);color:white;box-shadow:0 6px 0 #0b381d}.btn-light{background:white;color:var(--green);border:1px solid #c9d5cc}
     footer{text-align:center;padding:32px 20px 50px;color:#52705b;font-weight:700}.tiny{font-size:.9rem;color:#6c7d70;margin-top:8px}
     .choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice button{padding:14px;border-radius:14px;border:2px solid #d8c887;background:#fff;font-weight:900;cursor:pointer}.choice button.active{background:var(--green);color:#fff;border-color:var(--green)}.attendee-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}.mini-btn{border:0;border-radius:10px;padding:9px 11px;cursor:pointer;font-weight:900}.dashboard{grid-column:span 12;display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.participants-box,.supplies-box{background:#fff;border-radius:22px;padding:22px;border:1px solid rgba(20,91,46,.14);box-shadow:0 12px 30px rgba(32,57,40,.07)}.participant{padding:12px 0;border-bottom:1px dashed #d7dfd9}.participant:last-child{border-bottom:0}.participant .names{font-weight:900}.participant .bringline{font-size:.92rem;color:#5a6f60;margin-top:4px}.supply{margin:16px 0}.supply-head{display:flex;justify-content:space-between;gap:12px;align-items:end}.supply-title{font-weight:950;font-size:1.08rem}.supply-numbers{font-size:.9rem;text-align:right}.bar{height:14px;background:#ece7d4;border-radius:999px;overflow:hidden;margin:8px 0}.bar>span{display:block;height:100%;background:var(--green);border-radius:999px;transition:width .25s}.delta{font-weight:900}.delta.missing{color:#b3402c}.delta.ok{color:var(--green)}.empty{color:#738078;font-style:italic}.sync-note{font-size:.85rem;color:#6f775f;margin-top:10px}.other-items{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.tag{background:#f4f0df;padding:7px 10px;border-radius:999px;font-size:.9rem}.hidden{display:none!important}
@@ -92,7 +92,7 @@
 
       <section class="card poster" id="cartaz">
         <h2>🪧 Cartaz oficial</h2>
-        <img src="/cartaz-original.jpg?v=20260910-2" alt="Cartaz da Festa do Pinhal 2026, de 18 a 23 de setembro" loading="eager" fetchpriority="high" width="600" height="750" decoding="async" />
+        <img src="/cartaz-original.jpg?v=20260910-3" alt="Cartaz da Festa do Pinhal 2026, de 18 a 23 de setembro" loading="eager" fetchpriority="high" />
       </section>
 
       <section class="card rsvp" id="rsvp">
@@ -108,108 +108,47 @@
               <div class="field"><label for="name">O teu nome</label><input id="name" placeholder="Ex.: João" /></div>
               <div id="yes-fields">
                 <div class="field"><label>Nomes de quem vai contigo</label><div id="attendees"></div><button class="mini-btn" type="button" id="add-attendee">+ Adicionar pessoa</button></div>
-                <div class="field"><label for="beer">Cerveja que levam (litros)</label><input id="beer" type="number" min="0" step="0.25" value="0" /></div>
-                <div class="field"><label for="meat">Carne que levam (kg)</label><input id="meat" type="number" min="0" step="0.1" value="0" /></div>
-                <div class="field"><label for="other">Outras coisas</label><textarea id="other" placeholder="Ex.: pão, vinho, sobremesa, gelo…"></textarea></div>
+                <div class="field"><label for="beer">Cerveja que levas (litros)</label><input id="beer" type="number" min="0" step="0.5" value="0" /></div>
+                <div class="field"><label for="meat">Carne que levas (kg)</label><input id="meat" type="number" min="0" step="0.1" value="0" /></div>
+                <div class="field"><label for="other">Outras coisas</label><textarea id="other" placeholder="Ex.: pão, gelo, sobremesa..."></textarea></div>
               </div>
-              <button class="btn btn-dark" type="button" id="confirm-rsvp">Guardar confirmação</button>
-              <div class="sync-note">As confirmações ficam guardadas neste dispositivo. A lista e as contas atualizam imediatamente.</div>
+              <button class="btn btn-dark" id="confirm-rsvp" type="button">Guardar confirmação</button>
+              <div class="sync-note">As confirmações são partilhadas: todos os convidados veem a mesma lista e as contas atualizadas.</div>
             </div>
           </div>
-          <div>
-            <h2>📊 Regra da casa</h2>
-            <p>O site calcula automaticamente o necessário com base em quem confirmou:</p>
-            <ul class="plain-list">
-              <li><span class="ico">🍺</span><span><strong>2 L de cerveja por pessoa</strong></span></li>
-              <li><span class="ico">🥩</span><span><strong>300 g de carne por pessoa</strong></span></li>
-            </ul>
-            <p>Assim dá para perceber logo o que <strong>já vai ser levado</strong>, o que <strong>ainda falta</strong> e se já há <strong>sobra</strong>.</p>
-          </div>
+          <div class="share-box"><pre>Confirma aqui a presença e diz o que vais levar. Assim conseguimos perceber rapidamente o que já está assegurado e o que ainda falta.</pre></div>
         </div>
       </section>
 
       <section class="dashboard">
         <div class="participants-box">
-          <h2>👥 Participantes</h2>
+          <h2>👥 Quem vai</h2>
           <div id="participant-count" class="tiny"></div>
           <div id="participants-list"></div>
         </div>
         <div class="supplies-box">
-          <h2>🍺🥩 O que temos / o que falta</h2>
+          <h2>📦 O que temos / o que falta</h2>
           <div class="supply">
-            <div class="supply-head"><div class="supply-title">Cerveja</div><div id="beer-numbers" class="supply-numbers"></div></div>
-            <div class="bar"><span id="beer-bar" style="width:0%"></span></div>
-            <div id="beer-delta" class="delta"></div>
+            <div class="supply-head"><div class="supply-title">🍺 Cerveja</div><div class="supply-numbers" id="beer-numbers"></div></div>
+            <div class="bar"><span id="beer-bar" style="width:0%"></span></div><div class="delta" id="beer-delta"></div>
           </div>
           <div class="supply">
-            <div class="supply-head"><div class="supply-title">Carne</div><div id="meat-numbers" class="supply-numbers"></div></div>
-            <div class="bar"><span id="meat-bar" style="width:0%"></span></div>
-            <div id="meat-delta" class="delta"></div>
+            <div class="supply-head"><div class="supply-title">🥩 Carne</div><div class="supply-numbers" id="meat-numbers"></div></div>
+            <div class="bar"><span id="meat-bar" style="width:0%"></span></div><div class="delta" id="meat-delta"></div>
           </div>
-          <div><strong>Outras coisas que já vão:</strong><div id="other-items" class="other-items"></div>
-              <div class="sync-note" style="margin-top:14px"><strong>Como são feitas as estimativas:</strong> contamos <strong>2 L de cerveja por pessoa</strong> e <strong>300 g de carne por pessoa</strong>. Para as outras bebidas, contamos 1 unidade/garrafa por pessoa confirmada. Os valores são apenas uma referência para ajudar a perceber o que já está assegurado e o que ainda falta.</div></div>
+          <div id="other-items" class="other-items"></div>
+          <div class="sync-note" style="margin-top:14px"><strong>Como são feitas as estimativas:</strong> contamos <strong>2 L de cerveja por pessoa</strong> e <strong>300 g de carne por pessoa</strong>. Para as outras bebidas, contamos 1 unidade/garrafa por pessoa confirmada. Os valores são apenas uma referência para ajudar a perceber o que já está assegurado e o que ainda falta.</div>
         </div>
       </section>
     </div>
   </main>
 
-  <footer>
-    Batatada · Pinhal, Óbidos · 23 de setembro de 2026<br>
-    <span class="tiny">Site feito para juntar a malta. 🥔🍷</span>
-  </footer>
-
-  <script>
-    const $ = id => document.getElementById(id);
-    const KEY = 'batatada2026-rsvps-v2';
-    let answer = 'yes';
-    let data = JSON.parse(localStorage.getItem(KEY) || '[]');
-
-    function esc(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-    function save(){localStorage.setItem(KEY, JSON.stringify(data)); render();}
-    function addAttendee(value=''){
-      const row=document.createElement('div'); row.className='attendee-row';
-      row.innerHTML=`<input class="attendee-name" placeholder="Nome da pessoa" value="${esc(value)}"><button type="button" class="mini-btn">✕</button>`;
-      row.querySelector('button').onclick=()=>row.remove(); $('attendees').appendChild(row);
-    }
-    $('add-attendee').onclick=()=>addAttendee();
-    document.querySelectorAll('#choice button').forEach(btn=>btn.onclick=()=>{
-      answer=btn.dataset.answer; document.querySelectorAll('#choice button').forEach(b=>b.classList.toggle('active',b===btn));
-      $('yes-fields').classList.toggle('hidden',answer==='no');
-    });
-    $('confirm-rsvp').onclick=()=>{
-      const owner=$('name').value.trim(); if(!owner){alert('Mete o teu nome.');return;}
-      const extra=[...document.querySelectorAll('.attendee-name')].map(i=>i.value.trim()).filter(Boolean);
-      const names=[owner,...extra];
-      const entry={id:Date.now(),owner,status:answer,names,beer:answer==='yes'?Number($('beer').value||0):0,meat:answer==='yes'?Number($('meat').value||0):0,other:answer==='yes'?$('other').value.trim():''};
-      const existing=data.findIndex(x=>x.owner.toLowerCase()===owner.toLowerCase());
-      if(existing>=0) data[existing]=entry; else data.push(entry);
-      save();
-      $('beer').value='0'; $('meat').value='0'; $('other').value=''; $('attendees').innerHTML='';
-      alert(answer==='yes'?'Presença confirmada! 🍻':'Ficou registado que não vais.');
-    };
-
-    function fmt(n,unit){return `${Number(n.toFixed(2))} ${unit}`;}
-    function renderSupply(kind, promised, required, unit){
-      const pct=required ? promised/required*100 : 0;
-      $(`${kind}-bar`).style.width=Math.min(100,pct)+'%';
-      $(`${kind}-numbers`).innerHTML=`Vai ser trazido: <strong>${fmt(promised,unit)}</strong><br>Necessário: <strong>${fmt(required,unit)}</strong> · ${required?Math.round(pct):0}%`;
-      const diff=promised-required, el=$(`${kind}-delta`);
-      if(required===0){el.textContent='Ainda não há participantes confirmados.';el.className='delta';}
-      else if(diff<0){el.textContent=`Falta ${fmt(-diff,unit)}`;el.className='delta missing';}
-      else if(diff>0){el.textContent=`Sobra ${fmt(diff,unit)}`;el.className='delta ok';}
-      else{el.textContent='Quantidade certa ✓';el.className='delta ok';}
-    }
-    function render(){
-      const yes=data.filter(x=>x.status==='yes'); const allNames=yes.flatMap(x=>x.names);
-      $('participant-count').textContent=`${allNames.length} pessoa${allNames.length===1?'':'s'} confirmada${allNames.length===1?'':'s'}`;
-      $('participants-list').innerHTML=yes.length?yes.map(x=>`<div class="participant"><div class="names">${x.names.map(esc).join(', ')}</div><div class="bringline">Leva: ${x.beer?fmt(x.beer,'L cerveja'):''}${x.beer&&x.meat?' · ':''}${x.meat?fmt(x.meat,'kg carne'):''}${(x.beer||x.meat)&&x.other?' · ':''}${x.other?esc(x.other):(!x.beer&&!x.meat?'nada indicado':'')}</div></div>`).join(''):'<div class="empty">Ainda ninguém confirmou.</div>';
-      const beer=yes.reduce((a,x)=>a+x.beer,0), meat=yes.reduce((a,x)=>a+x.meat,0), needBeer=allNames.length*2, needMeat=allNames.length*.3;
-      renderSupply('beer',beer,needBeer,'L'); renderSupply('meat',meat,needMeat,'kg');
-      const others=yes.flatMap(x=>x.other?[x.other]:[]); $('other-items').innerHTML=others.length?others.map(x=>`<span class="tag">${esc(x)}</span>`).join(''):'<span class="empty">Nada indicado ainda.</span>';
-    }
-    render();
-  </script>
+  <footer>Batatada · Pinhal, Óbidos · 23 de setembro de 2026</footer>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="shared-rsvp.js"></script>
+  <script>
+    document.querySelectorAll('#choice button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('#choice button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.getElementById('yes-fields').classList.toggle('hidden',btn.dataset.answer==='no')}));
+    document.getElementById('add-attendee')?.addEventListener('click',()=>{const row=document.createElement('div');row.className='attendee-row';row.innerHTML='<input class="attendee-name" placeholder="Nome da pessoa" /><button class="mini-btn" type="button">✕</button>';row.querySelector('button').onclick=()=>row.remove();document.getElementById('attendees').appendChild(row)});
+  </script>
 </body>
 </html>
