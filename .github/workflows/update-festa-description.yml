@@ -1,0 +1,31 @@
+name: Update festa description
+on:
+  push:
+    paths:
+      - '.github/workflows/update-festa-description.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update copy
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old='''        <h2>Mas afinal… o que é a Festa do Pinhal?</h2>\n        <p>A Festa do Pinhal dura vários dias, mas <span class="highlight">o nosso convite é só para dia 23</span>, o dia da tradicional Batatada: bacalhau, batata, música e convívio à moda antiga.</p>\n        <p>E depois vem a melhor parte: quando a festa abranda, há tradição de passar pelas adegas e provar a <span class="highlight">água-pé</span> que a malta da terra foi fazendo ao longo do ano. 😄</p>'''
+          new='''        <h2>Mas afinal… o que é a Festa do Pinhal?</h2>\n        <p><strong>Que é que isso interessa caralho?! Vens e comes e bebes e fodes-te todo e vais gostar muito.</strong></p>\n        <p>A Festa do Pinhal dura vários dias, mas nós estamos a combinar pa dia 23, o dia da tradicional Batatada. Bacalhau, batata, música e convívio à moda antiga com bandas perdidas incluídas no pacote. Músicas essas muitas vezes sobre o pacote de uma galderia qualquer.</p>\n        <p>E depois vem a melhor parte, há tradição de passar pelas adegas e provar a <span class="highlight">água-pé</span> que os antigos da terra foram fazendo ao longo do ano. 😄 Gandas velhotes é mesmo assim!</p>'''
+          if old not in s:
+              raise SystemExit('Expected section not found')
+          p.write_text(s.replace(old,new))
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Update Festa do Pinhal description"
+          git push
