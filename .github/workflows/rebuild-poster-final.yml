@@ -1,0 +1,67 @@
+name: Rebuild final poster
+on:
+  push:
+    paths:
+      - '.github/workflows/rebuild-poster-final.yml'
+permissions:
+  contents: write
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild exact poster and patch page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64, re
+
+          parts = [
+              Path('.poster-parts/part1.txt').read_text().strip(),
+              Path('.poster-parts/part1b.txt').read_text().strip(),
+              Path('.poster-parts/part2.txt').read_text().strip(),
+              Path('.poster-parts/part3.txt').read_text().strip(),
+          ]
+          b64 = ''.join(parts)
+          if len(b64) != 34260:
+              raise SystemExit(f'Wrong base64 length: {len(b64)}')
+          raw = base64.b64decode(b64, validate=True)
+          if len(raw) != 25693:
+              raise SystemExit(f'Wrong JPEG size: {len(raw)}')
+          if not raw.startswith(b'\xff\xd8') or not raw.endswith(b'\xff\xd9'):
+              raise SystemExit('Invalid JPEG markers')
+          Path('cartaz-final.jpg').write_bytes(raw)
+
+          p = Path('index.html')
+          s = p.read_text()
+
+          # Poster CSS: full-width card on desktop; literal viewport width on mobile.
+          s = re.sub(
+              r'\.poster\{grid-column:[^}]+\}\.poster img\{[^}]+\}',
+              '.poster{grid-column:1/-1;overflow:hidden}.poster img{display:block;width:100%;height:auto;max-width:none;border-radius:18px;box-shadow:0 16px 35px rgba(0,0,0,.14)}',
+              s,
+              count=1
+          )
+
+          # Replace only the image inside the official-poster section, regardless of the old data URI.
+          pat = r'(<section class="card poster" id="cartaz">\s*<h2>🪧 Cartaz oficial</h2>\s*)<img\b[^>]*>'
+          repl = r'\1<img src="/cartaz-final.jpg?v=20260910-final" alt="Cartaz da Festa do Pinhal 2026, de 18 a 23 de setembro" loading="eager" fetchpriority="high" />'
+          s2, n = re.subn(pat, repl, s, count=1, flags=re.S)
+          if n != 1:
+              raise SystemExit(f'Poster image replacement count: {n}')
+          s = s2
+
+          # Add mobile full-bleed rule before closing style tag.
+          mobile = '''\n    @media(max-width:820px){\n      .poster{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);border-radius:0;padding-left:0;padding-right:0}\n      .poster h2{padding-left:24px;padding-right:24px}\n      .poster img{width:100vw;height:auto;border-radius:0}\n    }\n'''
+          if 'width:100vw;margin-left:calc(50% - 50vw)' not in s:
+              s = s.replace('</style>', mobile + '  </style>', 1)
+
+          p.write_text(s)
+          PY
+      - name: Commit rebuilt poster
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cartaz-final.jpg index.html
+          git diff --cached --quiet || git commit -m "Rebuild complete poster and show it full width"
+          git push
