@@ -1,0 +1,45 @@
+name: Fix poster loading
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-poster-loading.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix poster image loading
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old='<img src="cartaz-original.jpg" alt="Cartaz da Festa do Pinhal 2026, de 18 a 23 de setembro" loading="lazy" />'
+          new='<img src="/cartaz-original.jpg?v=20260910-2" alt="Cartaz da Festa do Pinhal 2026, de 18 a 23 de setembro" loading="eager" fetchpriority="high" width="600" height="750" decoding="async" />'
+          if old not in s:
+              raise SystemExit('Poster img tag not found')
+          p.write_text(s.replace(old,new))
+          PY
+      - name: Relax poster cache to avoid stale failures
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('vercel.json')
+          data=json.loads(p.read_text())
+          for rule in data.get('headers',[]):
+              if rule.get('source')=='/cartaz-original.jpg':
+                  for h in rule.get('headers',[]):
+                      if h.get('key','').lower()=='cache-control':
+                          h['value']='public, max-age=3600, s-maxage=86400'
+          p.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html vercel.json
+          git diff --cached --quiet || git commit -m "Fix official poster loading"
+          git push
