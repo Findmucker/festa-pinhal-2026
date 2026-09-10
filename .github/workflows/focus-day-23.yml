@@ -1,0 +1,39 @@
+name: Focus invitation on September 23
+on:
+  push:
+    paths:
+      - '.github/workflows/focus-day-23.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rewrite invitation copy for day 23 only
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          replacements={
+            'Convite para a Festa do Pinhal 2026 — batatada, música, comida, adegas e boa companhia.':'Convite para a Batatada da Festa do Pinhal — 23 de setembro de 2026, no Pinhal, Óbidos.',
+            'Estão oficialmente convidados para uns dias de festa no Pinhal, em Óbidos. A ideia é simples: comer bem, beber qualquer coisita, ir à festa e acabar a noite todos juntos — sem grandes cerimónias.':'Estão oficialmente convidados para a Batatada no dia 23 de setembro, no Pinhal, em Óbidos. A ideia é simples: juntarmo-nos, comer bem, beber qualquer coisita, ir à festa e acabar a noite todos juntos — sem grandes cerimónias.',
+            '<div class="big">18–23</div>':'<div class="big">23</div>',
+            'A festa dura vários dias, mas a <strong>tradicional Batatada é dia 23</strong>. A festa é no Pinhal e fica mesmo perto de casa.':'<strong>Quarta-feira, 23 de setembro.</strong> É neste dia que nos vamos juntar para a tradicional Batatada. A festa é no Pinhal e fica mesmo perto de casa.',
+            'É a festa da terra, com quermesse, restaurante, música e bailarico. No último dia há a <span class="highlight">tradicional Batatada</span>: bacalhau, batata e convívio à moda antiga.':'A Festa do Pinhal dura vários dias, mas <span class="highlight">o nosso convite é só para dia 23</span>, o dia da tradicional Batatada: bacalhau, batata, música e convívio à moda antiga.',
+            '<h2>📅 Plano de ataque — dia 23</h2>':'<h2>📅 Quarta-feira, 23 de setembro</h2>',
+            'Festa do Pinhal · Pinhal, Óbidos · 18 a 23 de setembro de 2026':'Batatada · Pinhal, Óbidos · 23 de setembro de 2026'
+          }
+          for a,b in replacements.items():
+              if a not in s: print('warning: text not found:',a[:70])
+              s=s.replace(a,b)
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Focus Batatada invitation on September 23"
+          git push
