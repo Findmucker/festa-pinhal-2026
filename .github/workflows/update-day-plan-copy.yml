@@ -1,0 +1,29 @@
+name: Update day plan copy
+on:
+  push:
+    paths:
+      - '.github/workflows/update-day-plan-copy.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update day plan
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('Ficar pela festa, música e bailarico.', 'Festa, música e bailarico.')
+          s=s.replace('Divertirmo-nos todos juntos e fofinhos.', 'Divertirmo-nos todos juntinhos e fofinhos.')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Update day plan copy"
+          git push
