@@ -61,7 +61,7 @@ function drinksText(drinks){
   const arr=Array.isArray(drinks)?drinks:[];
   return arr.map(d=>`${Number(d.qty)||0} un. ${escS(d.name)}`).join(' · ');
 }
-function renderOtherDrinks(yes){
+function renderOtherDrinks(yes,allNames){
   const totals=new Map();
   yes.forEach(x=>(Array.isArray(x.other_drinks)?x.other_drinks:[]).forEach(d=>{
     const name=String(d.name||'').trim(); if(!name)return;
@@ -75,7 +75,11 @@ function renderOtherDrinks(yes){
   }
   if(box){
     const items=[...totals.values()];
-    box.innerHTML=`<div class="supply-title">🍷 Outras bebidas</div><div class="tiny" style="margin:4px 0 8px">Contadas por unidade/garrafa.</div>${items.length?`<div class="other-items">${items.map(d=>`<span class="tag"><strong>${escS(d.name)}</strong> — ${d.qty} un.</span>`).join('')}</div>`:'<div class="empty">Ainda não há outras bebidas indicadas.</div>'}`;
+    const totalUnits=items.reduce((a,d)=>a+Number(d.qty||0),0);
+    const needed=allNames.length;
+    const diff=totalUnits-needed;
+    const estimate=needed===0?'Ainda não há participantes confirmados.':diff<0?`Faltam ${-diff} garrafa${-diff===1?'':'s'}`:diff>0?`Sobram ${diff} garrafa${diff===1?'':'s'}`:'Quantidade certa ✓';
+    box.innerHTML=`<div class="supply-title">🍷 Outras bebidas</div><div class="tiny" style="margin:4px 0 8px">Estimativa: 1 unidade/garrafa por pessoa confirmada. Necessário: <strong>${needed}</strong> · Vai ser trazido: <strong>${totalUnits}</strong> · <strong>${estimate}</strong></div>${items.length?`<div class="other-items">${items.map(d=>`<span class="tag"><strong>${escS(d.name)}</strong> — ${d.qty} un.</span>`).join('')}</div>`:'<div class="empty">Ainda não há outras bebidas indicadas.</div>'}`;
   }
 }
 function renderShared(){
@@ -92,7 +96,7 @@ function renderShared(){
   }).join(''):'<div class="empty">Ainda ninguém confirmou.</div>';
   const beer=yes.reduce((a,x)=>a+Number(x.beer_liters||0),0), meat=yes.reduce((a,x)=>a+Number(x.meat_kg||0),0);
   renderSupplyS('beer',beer,allNames.length*2,'L'); renderSupplyS('meat',meat,allNames.length*.3,'kg');
-  renderOtherDrinks(yes);
+  renderOtherDrinks(yes,allNames);
   const others=yes.filter(x=>x.other_items).map(x=>x.other_items);
   if($s('other-items'))$s('other-items').innerHTML=others.length?others.map(x=>`<span class="tag">${escS(x)}</span>`).join(''):'<span class="empty">Nada indicado ainda.</span>';
 }
