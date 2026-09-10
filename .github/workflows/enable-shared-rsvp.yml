@@ -1,0 +1,30 @@
+name: Enable shared RSVP
+on:
+  push:
+    paths:
+      - '.github/workflows/enable-shared-rsvp.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Supabase realtime scripts
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          marker='<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>'
+          if marker not in s:
+              s=s.replace('</body>', f'  {marker}\n  <script src="shared-rsvp.js"></script>\n</body>')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Connect RSVP form to shared Supabase database"
+          git push
