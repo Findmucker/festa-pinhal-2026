@@ -1,0 +1,33 @@
+name: Embed poster directly in page
+on:
+  push:
+    paths:
+      - '.github/workflows/embed-poster.yml'
+permissions:
+  contents: write
+jobs:
+  embed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Embed complete poster
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text()
+          b64=Path('cartaz-embedded.txt').read_text().strip()
+          img='<img src="data:image/jpeg;base64,'+b64+'" alt="Cartaz da Festa do Pinhal 2026, de 18 a 23 de setembro" style="display:block;width:100%;height:auto;max-width:100%;object-fit:contain;border-radius:18px" />'
+          s2=re.sub(r'<img\s+src="[^"]*cartaz[^\"]*"[^>]*>', img, s, count=1)
+          if s2==s:
+              raise SystemExit('Poster img tag not found')
+          p.write_text(s2)
+          PY
+      - name: Commit embedded poster
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Embed complete poster directly in page"
+          git push
