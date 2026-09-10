@@ -5,14 +5,23 @@
     {
       "source": "/(.*)",
       "headers": [
-        {"key": "X-Content-Type-Options", "value": "nosniff"},
-        {"key": "Link", "value": "</cartaz-original.jpg>; rel=preload; as=image"}
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Link",
+          "value": "</cartaz-original.jpg>; rel=preload; as=image"
+        }
       ]
     },
     {
       "source": "/cartaz-original.jpg",
       "headers": [
-        {"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400"
+        }
       ]
     }
   ]
