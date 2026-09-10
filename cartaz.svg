@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <defs>
+    <style>
+      .bg{fill:#165b2d}.y{fill:#ffd43b}.o{fill:#f36b21}.w{fill:#fff}.muted{fill:#e7f1e9}.h{font-family:Arial,sans-serif;font-weight:900}.t{font-family:Arial,sans-serif;font-weight:700}.s{font-family:Arial,sans-serif;font-weight:600}
+    </style>
+  </defs>
+  <rect class="bg" width="900" height="1200" rx="28"/>
+  <g opacity=".08" fill="#ffd43b">
+    <path d="M0 980L210 670 120 1010 300 735 215 1080 390 805 320 1160H0Z"/>
+    <path d="M900 820L730 570 790 910 640 650 705 1010 535 740 590 1160H900Z"/>
+  </g>
+  <text x="450" y="90" text-anchor="middle" class="y h" font-size="46">FESTA DO</text>
+  <text x="450" y="175" text-anchor="middle" class="y h" font-size="92">PINHAL ’26</text>
+  <text x="450" y="220" text-anchor="middle" class="w t" font-size="26">EM HONRA DE SANTA ANA</text>
+  <rect x="300" y="250" width="300" height="54" rx="16" class="o"/>
+  <text x="450" y="287" text-anchor="middle" class="w h" font-size="28">18 A 23 SETEMBRO</text>
+
+  <g transform="translate(55,345)">
+    <rect width="370" height="175" rx="20" fill="#114823" stroke="#ffd43b" stroke-width="3"/>
+    <text x="20" y="38" class="o h" font-size="30">18 • SEXTA</text>
+    <text x="20" y="72" class="w t" font-size="20">09h — Alvorada com música gravada</text>
+    <text x="20" y="105" class="w t" font-size="20">20h — Quermesse e restaurante</text>
+    <text x="20" y="142" class="y h" font-size="31">22h — LINHA D’ÁGUA</text>
+  </g>
+  <g transform="translate(475,345)">
+    <rect width="370" height="175" rx="20" fill="#114823" stroke="#ffd43b" stroke-width="3"/>
+    <text x="20" y="38" class="o h" font-size="30">19 • SÁBADO</text>
+    <text x="20" y="72" class="w t" font-size="20">09h — Alvorada</text>
+    <text x="20" y="105" class="w t" font-size="20">20h — Quermesse e restaurante</text>
+    <text x="20" y="139" class="y h" font-size="30">22h — SKB</text>
+    <text x="210" y="139" class="y h" font-size="27">02h — DJ RICARDO SANTOS</text>
+  </g>
+
+  <g transform="translate(55,555)">
+    <rect width="370" height="250" rx="20" fill="#114823" stroke="#ffd43b" stroke-width="3"/>
+    <text x="20" y="38" class="o h" font-size="30">20 • DOMINGO</text>
+    <text x="20" y="72" class="w s" font-size="18">09h — Alvorada + peditório com banda</text>
+    <text x="20" y="102" class="w s" font-size="18">15h — Missa em honra de Santa Ana</text>
+    <text x="20" y="132" class="w s" font-size="18">Procissão + concerto da banda</text>
+    <text x="20" y="165" class="w s" font-size="18">20h — Quermesse e restaurante</text>
+    <text x="20" y="210" class="y h" font-size="38">21h — BAILE ANTIGO</text>
+  </g>
+  <g transform="translate(475,555)">
+    <rect width="370" height="250" rx="20" fill="#114823" stroke="#ffd43b" stroke-width="3"/>
+    <text x="20" y="38" class="o h" font-size="30">21 • SEGUNDA</text>
+    <text x="20" y="78" class="w t" font-size="20">09h — Alvorada</text>
+    <text x="20" y="116" class="w t" font-size="20">20h — Quermesse e restaurante</text>
+    <text x="20" y="148" class="w t" font-size="20">com coelho grelhado</text>
+    <text x="20" y="205" class="y h" font-size="38">21h — RODRIGO SOBREIRO</text>
+  </g>
+
+  <g transform="translate(55,840)">
+    <rect width="370" height="205" rx="20" fill="#114823" stroke="#ffd43b" stroke-width="3"/>
+    <text x="20" y="38" class="o h" font-size="30">22 • TERÇA</text>
+    <text x="20" y="78" class="w t" font-size="20">09h — Alvorada</text>
+    <text x="20" y="116" class="w t" font-size="20">20h — Quermesse + sopa da pedra</text>
+    <text x="20" y="170" class="y h" font-size="38">21h — LUÍS GODINHO</text>
+  </g>
+  <g transform="translate(475,840)">
+    <rect width="370" height="270" rx="20" fill="#114823" stroke="#ffd43b" stroke-width="3"/>
+    <text x="20" y="38" class="o h" font-size="30">23 • QUARTA</text>
+    <text x="20" y="75" class="w s" font-size="18">09h — Alvorada</text>
+    <text x="20" y="105" class="w s" font-size="18">14h — Peditório da batata e cebola</text>
+    <text x="20" y="135" class="y h" font-size="25">19h — TRADICIONAL BATATADA</text>
+    <text x="20" y="165" class="w s" font-size="18">19h — Cavaquinhos das Gaeiras</text>
+    <text x="20" y="195" class="w s" font-size="18">20h — Quermesse e restaurante</text>
+    <text x="20" y="228" class="y h" font-size="28">21h — TECLISTA 3G</text>
+    <text x="20" y="255" class="w s" font-size="18">00h — Sorteio do cabrito</text>
+  </g>
+
+  <text x="450" y="1160" text-anchor="middle" class="muted s" font-size="18">Pinhal • Óbidos • Festa do Pinhal 2026</text>
+</svg>
