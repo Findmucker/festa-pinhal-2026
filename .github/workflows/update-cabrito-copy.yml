@@ -1,0 +1,31 @@
+name: Update cabrito copy
+on:
+  push:
+    paths:
+      - '.github/workflows/update-cabrito-copy.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update cabrito text
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old='Sorteio do cabrito. Porque claro que há um cabrito. 🐐'
+          new='Sorteio do cabrito. Porque claro que há um cabrito. E vai ser meu!!! Tudo a comprar senhas pa eu ganhar o cabrito crlh! QUERO O CABRITO E DEPOIS VOU-LHE CHAMAR GERTRUDES O CABRITO! 🐐'
+          if old not in s:
+              raise SystemExit('Expected cabrito text not found')
+          p.write_text(s.replace(old,new))
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Update cabrito copy"
+          git push
