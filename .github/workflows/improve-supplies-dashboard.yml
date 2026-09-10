@@ -1,0 +1,48 @@
+name: Improve supplies dashboard
+on:
+  push:
+    paths:
+      - '.github/workflows/improve-supplies-dashboard.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Improve supplies dashboard styles
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          css='''
+    /* Supplies dashboard refresh */
+    .supplies-box{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff,#fffaf0);border:2px solid rgba(20,91,46,.12);box-shadow:0 18px 45px rgba(32,57,40,.10)}
+    .supplies-box:before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-70px;top:-90px;background:rgba(255,211,50,.18);pointer-events:none}
+    .supplies-box h2{position:relative;margin-bottom:4px}
+    .supplies-box>.tiny{position:relative;margin-bottom:16px}
+    .supplies-box .supply{position:relative;margin:12px 0;padding:16px;border-radius:18px;background:#fff;border:1px solid #ebe4cc;box-shadow:0 8px 20px rgba(32,57,40,.06)}
+    .supplies-box .supply-title{font-size:1.12rem;display:flex;align-items:center;gap:7px}
+    .supplies-box .supply-numbers{background:#f7f3e5;border-radius:12px;padding:8px 10px;line-height:1.4;color:#415347}
+    .supplies-box .bar{height:18px;background:#eee8d4;box-shadow:inset 0 1px 2px rgba(0,0,0,.08);border:1px solid rgba(20,91,46,.08)}
+    .supplies-box .bar>span{background:linear-gradient(90deg,var(--green),#2f8d4d);box-shadow:0 0 0 1px rgba(255,255,255,.25) inset}
+    .supplies-box .delta{display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:6px 10px;border-radius:999px;font-size:.9rem;background:#eef7ef}
+    .supplies-box .delta.missing{background:#fff0ec;color:#a43825;border:1px solid #f0c0b6}
+    .supplies-box .delta.ok{background:#eaf7ed;color:#176b32;border:1px solid #b8ddc2}
+    #other-drinks-summary{background:linear-gradient(135deg,#fff,#fff8df)}
+    #other-drinks-summary .other-items{margin-top:12px}
+    #other-drinks-summary .tag,#other-items .tag{background:#fff2bf;border:1px solid #ead17a;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+    @media(max-width:820px){.supplies-box .supply-head{align-items:flex-start;flex-direction:column}.supplies-box .supply-numbers{text-align:left;width:100%}}
+'''
+          if '/* Supplies dashboard refresh */' not in s:
+              s=s.replace('</style>',css+'\n  </style>')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Improve supplies dashboard design"
+          git push
