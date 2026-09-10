@@ -18,9 +18,12 @@
     .btn{appearance:none;border:0;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:16px;padding:14px 18px;font-weight:900;font-size:1rem;cursor:pointer;transition:.18s transform,.18s box-shadow}.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--yellow);color:#173a21;box-shadow:0 7px 0 #b89400}.btn-secondary{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.24)}
     .date-card{background:#fff;color:var(--ink);border-radius:28px;padding:24px;transform:rotate(2deg);box-shadow:0 24px 60px rgba(0,0,0,.3);border:6px solid var(--yellow)}.date-card .big{font-size:4rem;font-weight:1000;line-height:1}.date-card .small{font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--orange)}.date-card p{margin:12px 0 0;line-height:1.45}
     main{width:min(1100px,calc(100% - 32px));margin:-28px auto 70px;position:relative;z-index:2}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}.card{background:var(--card);border-radius:24px;padding:24px;border:1px solid rgba(20,91,46,.12);box-shadow:0 14px 40px rgba(32,57,40,.08)}
-    .span-7{grid-column:span 7}.span-5{grid-column:span 5}.span-12{grid-column:1/-1}.span-6{grid-column:span 6}h2{font-size:clamp(1.45rem,3vw,2rem);margin:0 0 12px}p{line-height:1.6}.highlight{background:var(--yellow);padding:.06em .25em;border-radius:.25em;font-weight:900}.timeline{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:12px}.timeline li{display:grid;grid-template-columns:74px 1fr;gap:10px;align-items:start}.time{font-weight:950;color:var(--orange)}
-    .checklist{display:grid;gap:10px;margin-top:14px}.check{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:16px;background:#f7f1df}.ico{font-size:1.25rem}.poster img{width:100%;display:block;border-radius:18px;box-shadow:0 12px 32px rgba(0,0,0,.14)}.poster figcaption{font-size:.9rem;opacity:.75;margin-top:8px}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:grid;gap:6px}label{font-weight:800;font-size:.92rem}input,select,textarea{font:inherit;border:1px solid #d7d1bf;border-radius:14px;background:#fff;padding:12px 13px;color:var(--ink);width:100%}textarea{min-height:94px;resize:vertical}.full{grid-column:1/-1}.result{margin-top:14px;border:1px dashed #d3ad00;background:#fff9c9;border-radius:16px;padding:14px;display:none;white-space:pre-wrap;line-height:1.5}.note{font-size:.9rem;opacity:.72}.party{font-size:clamp(2rem,6vw,4rem);font-weight:1000;line-height:1;margin:0}.footer{text-align:center;padding:20px;color:#52705b}.tiny{font-size:.82rem;opacity:.72}@media(max-width:760px){.hero{min-height:auto;padding-top:38px}.hero-inner{grid-template-columns:1fr}.date-card{transform:none}.span-7,.span-5,.span-6{grid-column:1/-1}.form-grid{grid-template-columns:1fr}.timeline li{grid-template-columns:64px 1fr}main{margin-top:-20px}.party{font-size:2.5rem}}
+    .intro{grid-column:span 12}.intro h2,.card h2{margin:.1rem 0 .8rem;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-.03em}.intro p{font-size:1.13rem;line-height:1.65;margin:.6rem 0}.highlight{font-weight:900;color:var(--green)}
+    .schedule{grid-column:span 7}.bring{grid-column:span 5}.schedule-list,.plain-list{list-style:none;padding:0;margin:10px 0 0}.schedule-list li,.plain-list li{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed #cdd9d0}.schedule-list li:last-child,.plain-list li:last-child{border-bottom:0}.time{min-width:58px;color:var(--orange);font-weight:1000}.ico{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:#e8f4eb;flex:0 0 auto}
+    .poster{grid-column:span 6}.poster img{width:100%;display:block;border-radius:18px;box-shadow:0 16px 35px rgba(0,0,0,.14)}.party{grid-column:span 6;background:var(--green);color:#fff}.party h2{color:var(--yellow)}.party p,.party li{color:#f5fff6}.party .plain-list li{border-color:rgba(255,255,255,.18)}
+    .rsvp{grid-column:span 12;background:linear-gradient(135deg,#fff3be,#ffe59a);border:2px solid #f0c52e}.rsvp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px}.rsvp p{line-height:1.55}.form{display:grid;gap:12px}.field{display:grid;gap:6px}.field label{font-weight:800;font-size:.92rem}.field input,.field select,.field textarea{width:100%;border:1px solid #d8c887;border-radius:12px;padding:12px 13px;font:inherit;background:#fff}.field textarea{min-height:88px;resize:vertical}.share-box{background:#fff;border-radius:18px;padding:18px;border:1px dashed #d5bc55}.share-box pre{white-space:pre-wrap;font-family:inherit;margin:0;color:#27402f;line-height:1.5}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.btn-dark{background:var(--green);color:white;box-shadow:0 6px 0 #0b381d}.btn-light{background:white;color:var(--green);border:1px solid #c9d5cc}
+    footer{text-align:center;padding:32px 20px 50px;color:#52705b;font-weight:700}.tiny{font-size:.9rem;color:#6c7d70;margin-top:8px}
+    @media(max-width:820px){.hero{min-height:auto;padding-top:30px}.hero-inner{grid-template-columns:1fr}.date-card{transform:none}.schedule,.bring,.poster,.party{grid-column:span 12}.rsvp-wrap{grid-template-columns:1fr}main{margin-top:-22px}.hero h1{font-size:clamp(3.2rem,17vw,5.4rem)}}
   </style>
 </head>
 <body>
@@ -28,106 +31,113 @@
     <div class="hero-inner">
       <div>
         <div class="eyebrow">🥔 Festa do Pinhal 2026</div>
-        <h1>BATATADA<span class="accent">!!!</span></h1>
+        <h1>BOAS PESSOAL!<br><span class="accent">BATATADA!!!</span></h1>
         <p class="lead">Estão oficialmente convidados para uns dias de festa no Pinhal, em Óbidos. A ideia é simples: comer bem, beber qualquer coisita, ir à festa e acabar a noite todos juntos — sem grandes cerimónias.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#confirmar">Eu alinho 🍷</a>
-          <a class="btn btn-secondary" href="#cartaz">Ver cartaz</a>
+          <a class="btn btn-primary" href="#rsvp">✅ Confirmar presença</a>
+          <a class="btn btn-secondary" href="#cartaz">🪧 Ver cartaz</a>
         </div>
       </div>
       <aside class="date-card">
-        <div class="small">Setembro 2026</div>
+        <div class="small">Marca já</div>
         <div class="big">18–23</div>
+        <div style="font-size:1.55rem;font-weight:1000">SETEMBRO 2026</div>
         <p>A festa dura vários dias, mas a <strong>tradicional Batatada é dia 23</strong>. A festa é no Pinhal e fica mesmo perto de casa.</p>
       </aside>
     </div>
   </header>
 
   <main>
-    <section class="grid">
-      <article class="card span-7">
+    <div class="grid">
+      <section class="card intro">
         <h2>Mas afinal… o que é a Festa do Pinhal?</h2>
         <p>É a festa da terra, com quermesse, restaurante, música e bailarico. No último dia há a <span class="highlight">tradicional Batatada</span>: bacalhau, batata e convívio à moda antiga.</p>
-        <p>E no fim as adegas da terra abrem as portas para a malta entrar, provar coisas e beber água-pé — se os costumes se mantiverem como nos outros anos.</p>
-      </article>
+        <p>E depois vem a melhor parte: quando a festa abranda, há tradição de passar pelas adegas e provar a <span class="highlight">água-pé</span> que a malta da terra foi fazendo ao longo do ano. 😄</p>
+      </section>
 
-      <article class="card span-5">
+      <section class="card schedule">
         <h2>📅 Plano de ataque — dia 23</h2>
-        <ul class="timeline">
-          <li><span class="time">Antes</span><span>Juntamo-nos cá em casa, grelhamos carne, fazemos umas pizzas e vamos aquecendo.</span></li>
+        <ul class="schedule-list">
+          <li><span class="time">14:00</span><span><strong>Peditório da batata e da cebola</strong> para preparar a batatada.</span></li>
           <li><span class="time">19:00</span><span><strong>Batatada tradicional</strong> + Cavaquinhos das Gaeiras.</span></li>
-          <li><span class="time">20:00</span><span>Abertura da quermesse e restaurante.</span></li>
-          <li><span class="time">21:00</span><span>Teclista 3G.</span></li>
-          <li><span class="time">00:00</span><span>Sorteio do cabrito 🐐</span></li>
+          <li><span class="time">20:00</span><span>Abertura da quermesse e do restaurante.</span></li>
+          <li><span class="time">21:00</span><span><strong>Teclista 3G</strong> e continuação da festa.</span></li>
+          <li><span class="time">00:00</span><span>Sorteio do cabrito. Porque claro que há um cabrito. 🐐</span></li>
+          <li><span class="time">Depois</span><span>Volta pelas adegas, convívio e continuação da noite.</span></li>
         </ul>
-      </article>
+      </section>
 
-      <article class="card span-6">
+      <section class="card bring">
         <h2>🎒 O que trazer</h2>
-        <div class="checklist">
-          <div class="check"><span class="ico">🥩</span><span>Carne ou outra coisa para grelhar/comer cá antes.</span></div>
-          <div class="check"><span class="ico">🍕</span><span>Quem quiser pode trazer coisas para pizza / petiscos.</span></div>
-          <div class="check"><span class="ico">🍻</span><span>Bebidas que queiram ter por cá.</span></div>
-          <div class="check"><span class="ico">🛏️</span><span>Há colchões e espaço para dormir — combinem connosco.</span></div>
-        </div>
-      </article>
+        <ul class="plain-list">
+          <li><span class="ico">🍽️</span><span><strong>Prato e talheres</strong> para a batatada.</span></li>
+          <li><span class="ico">🥤</span><span>Alguma bebida, se quiserem reforçar o stock.</span></li>
+          <li><span class="ico">🥩</span><span>Quem quiser pode trazer carne para grelhar antes/depois em casa.</span></li>
+          <li><span class="ico">😎</span><span>Boa disposição. O resto arranja-se.</span></li>
+        </ul>
+      </section>
 
-      <article class="card span-6">
-        <h2>✅ Missões da noite</h2>
-        <div class="checklist">
-          <div class="check"><span class="ico">🥔</span><span>Comer bacalhau e batata na Batatada.</span></div>
-          <div class="check"><span class="ico">🍷</span><span>Beber pinga na festa.</span></div>
-          <div class="check"><span class="ico">🎉</span><span>Participar na festa e no bailarico.</span></div>
-          <div class="check"><span class="ico">🏡</span><span>Dar uma volta às adegas, provar coisas e beber água-pé.</span></div>
-        </div>
-      </article>
+      <section class="card party">
+        <h2>🍻 A ideia para o dia</h2>
+        <ul class="plain-list">
+          <li><span class="ico">🔥</span><span>Carne grelhada e umas pingas antes de irmos para a festa.</span></li>
+          <li><span class="ico">🥔</span><span>Comer bacalhau e batata na Batatada.</span></li>
+          <li><span class="ico">🎶</span><span>Ficar pela festa, música e bailarico.</span></li>
+          <li><span class="ico">🍷</span><span>Ir às adegas e provar água-pé.</span></li>
+          <li><span class="ico">🫶</span><span>Divertirmo-nos todos juntos e fofinhos.</span></li>
+        </ul>
+      </section>
 
-      <figure class="card span-12 poster" id="cartaz">
-        <h2>🎨 Cartaz oficial</h2>
-        <img src="cartaz.jpg" alt="Cartaz da Festa do Pinhal 2026, de 18 a 23 de setembro" loading="lazy" />
-        <figcaption>Programa da Festa do Pinhal 2026, em honra de Santa Ana.</figcaption>
-      </figure>
+      <section class="card poster" id="cartaz">
+        <h2>🪧 Cartaz da Festa do Pinhal</h2>
+        <img src="cartaz.svg" alt="Cartaz da Festa do Pinhal 2026, de 18 a 23 de setembro" loading="lazy" />
+      </section>
 
-      <section class="card span-12" id="confirmar">
-        <p class="party">Bora pessoal! 🍻</p>
-        <div class="grid" style="margin-top:18px">
-          <div class="span-5">
-            <h2>Confirma se vens</h2>
+      <section class="card rsvp" id="rsvp">
+        <div class="rsvp-wrap">
+          <div>
+            <h2>✅ Confirma aí, criatura</h2>
             <p>Preenche isto e o site prepara uma mensagem com a tua confirmação e o que pensas levar. Depois é só partilhar no grupo / mandar ao Edu.</p>
-            <p class="note">O formulário não guarda dados em servidor; apenas cria uma mensagem no teu próprio dispositivo.</p>
+            <div class="form">
+              <div class="field"><label for="name">Nome</label><input id="name" placeholder="Ex.: João" /></div>
+              <div class="field"><label for="status">Vais?</label><select id="status"><option value="Vou!">Vou! 😎</option><option value="Talvez">Talvez 🤔</option><option value="Não consigo">Não consigo 😭</option></select></div>
+              <div class="field"><label for="people">Quantas pessoas?</label><input id="people" type="number" min="1" value="1" /></div>
+              <div class="field"><label for="bring">O que levas?</label><textarea id="bring" placeholder="Ex.: 2 garrafas de vinho, carne, sobremesa…"></textarea></div>
+              <button class="btn btn-dark" type="button" id="generate">Gerar confirmação</button>
+            </div>
           </div>
-          <div class="span-7">
-            <form id="rsvp">
-              <div class="form-grid">
-                <div class="field"><label for="name">Nome</label><input id="name" required placeholder="Ex.: João" /></div>
-                <div class="field"><label for="status">Vens?</label><select id="status"><option>Sim, claro!</option><option>Talvez / ainda confirmo</option><option>Não consigo 😭</option></select></div>
-                <div class="field"><label for="people">Quantos são?</label><input id="people" type="number" min="1" value="1" /></div>
-                <div class="field"><label for="bring">O que levas?</label><input id="bring" placeholder="Ex.: 300 g de carne + cerveja" /></div>
-                <div class="full cta-row"><button class="btn btn-primary" type="submit">Gerar confirmação</button><button class="btn" id="share" type="button" style="background:#e9eadf;color:#173a21">Partilhar</button></div>
-              </div>
-              <div class="result" id="result"></div>
-            </form>
+          <div class="share-box">
+            <strong>A tua mensagem:</strong>
+            <pre id="message">Preenche os campos e carrega em “Gerar confirmação”.</pre>
+            <div class="actions">
+              <button class="btn btn-dark" id="share" type="button">📲 Partilhar</button>
+              <button class="btn btn-light" id="copy" type="button">📋 Copiar</button>
+            </div>
+            <div class="tiny">O formulário não guarda dados no servidor — apenas prepara a mensagem para partilhares.</div>
           </div>
         </div>
       </section>
-    </section>
+    </div>
   </main>
 
-  <footer class="footer">
+  <footer>
     Festa do Pinhal · Pinhal, Óbidos · 18 a 23 de setembro de 2026<br>
-    <span class="tiny">Convite não oficial feito para a malta.</span>
+    <span class="tiny">Site feito para juntar a malta. 🥔🍷</span>
   </footer>
 
   <script>
-    const $=id=>document.getElementById(id);
+    const $ = (id) => document.getElementById(id);
     function buildMessage(){
-      const name=$('name').value.trim()||'Alguém misterioso';
-      const status=$('status').value;
-      const people=$('people').value||'1';
-      const bring=$('bring').value.trim()||'ainda por decidir';
-      return `🥔 BATATADA 2026 — CONFIRMAÇÃO\n\n👤 ${name}\n✅ ${status}\n👥 Pessoas: ${people}\n🎒 Levo: ${bring}\n\nFesta do Pinhal, 23 de setembro. Bora! 🍷`;
+      const name = $('name').value.trim() || 'Anónimo misterioso';
+      const status = $('status').value;
+      const people = $('people').value || '1';
+      const bring = $('bring').value.trim() || 'Ainda não sei';
+      const text = `🥔 BATATADA 2026 — CONFIRMAÇÃO\n\n👤 ${name}\n✅ ${status}\n👥 Pessoas: ${people}\n🎒 Levo: ${bring}\n\nFesta do Pinhal, 23 de setembro. Bora! 🍷`;
+      $('message').textContent = text;
+      return text;
     }
-    $('rsvp').addEventListener('submit',e=>{e.preventDefault();const text=buildMessage();$('result').textContent=text;$('result').style.display='block'});
+    $('generate').addEventListener('click', buildMessage);
+    $('copy').addEventListener('click', async()=>{try{await navigator.clipboard.writeText(buildMessage());$('copy').textContent='✅ Copiado!';setTimeout(()=>$('copy').textContent='📋 Copiar',1600)}catch(e){alert('Não consegui copiar automaticamente. Seleciona a mensagem e copia manualmente.')}});
     $('share').addEventListener('click', async()=>{const text=buildMessage(); if(navigator.share){try{await navigator.share({title:'Batatada 2026',text})}catch(e){}} else {try{await navigator.clipboard.writeText(text);alert('Mensagem copiada! Cola no grupo.')}catch(e){alert(text)}}});
   </script>
 </body>
