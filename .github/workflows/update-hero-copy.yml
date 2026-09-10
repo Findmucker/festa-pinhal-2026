@@ -1,0 +1,34 @@
+name: Update hero copy
+
+on:
+  push:
+    paths:
+      - '.github/workflows/update-hero-copy.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-copy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace hero text
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = 'Estão oficialmente convidados para a Batatada no dia 23 de setembro, no Pinhal, em Óbidos. A ideia é simples: juntarmo-nos, comer bem, beber qualquer coisita, ir à festa e acabar a noite todos juntos — sem grandes cerimónias.'
+          new = 'Estão convidados para a Batatada no dia 23 de setembro, no Pinhal, em Óbidos, na casa do Edu e arredores. A ideia é juntarmo-nos, comer, beber, e batatar até já não dar! Hehehe 😆'
+          if old not in s:
+              raise SystemExit('Texto original não encontrado')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Update Batatada hero copy"
+          git push
