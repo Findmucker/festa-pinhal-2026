@@ -1,0 +1,44 @@
+name: Update drink estimate
+on:
+  push:
+    paths:
+      - '.github/workflows/update-drink-estimate.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update drink estimate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('shared-rsvp.js')
+          s=p.read_text()
+          old="box.innerHTML=`<div class=\"supply-title\">🍷 Outras bebidas</div><div class=\"tiny\" style=\"margin:4px 0 8px\">Contadas por unidade/garrafa.</div>${items.length?`<div class=\"other-items\">${items.map(d=>`<span class=\"tag\"><strong>${escS(d.name)}</strong> — ${d.qty} un.</span>`).join('')}</div>`:'<div class=\"empty\">Ainda não há outras bebidas indicadas.</div>'}`;"
+          new="const totalUnits=items.reduce((a,d)=>a+Number(d.qty||0),0);\n    const needed=allNames.length;\n    const diff=totalUnits-needed;\n    const estimate=needed===0?'Ainda não há participantes confirmados.':diff<0?`Faltam ${-diff} garrafa${-diff===1?'':'s'}`:diff>0?`Sobram ${diff} garrafa${diff===1?'':'s'}`:'Quantidade certa ✓';\n    box.innerHTML=`<div class=\"supply-title\">🍷 Outras bebidas</div><div class=\"tiny\" style=\"margin:4px 0 8px\">Estimativa: 1 unidade/garrafa por pessoa confirmada. Necessário: <strong>${needed}</strong> · Vai ser trazido: <strong>${totalUnits}</strong> · <strong>${estimate}</strong></div>${items.length?`<div class=\"other-items\">${items.map(d=>`<span class=\"tag\"><strong>${escS(d.name)}</strong> — ${d.qty} un.</span>`).join('')}</div>`:'<div class=\"empty\">Ainda não há outras bebidas indicadas.</div>'}`;"
+          if old not in s: raise SystemExit('Target not found')
+          s=s.replace(old,new)
+          # renderOtherDrinks needs allNames to calculate the target
+          s=s.replace('function renderOtherDrinks(yes){','function renderOtherDrinks(yes,allNames){')
+          s=s.replace('renderOtherDrinks(yes);','renderOtherDrinks(yes,allNames);')
+          p.write_text(s)
+          PY
+      - name: Update estimate note
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('As outras bebidas não entram nesta estimativa: são apenas somadas por unidades/garrafas, conforme cada pessoa indicar.', 'Para as outras bebidas, contamos 1 unidade/garrafa por pessoa confirmada.')
+          s=s.replace('As restantes bebidas são contabilizadas à unidade/garrafa e não têm uma quantidade recomendada.', 'As restantes bebidas são contabilizadas à unidade/garrafa, com uma estimativa de 1 unidade por pessoa confirmada.')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add shared-rsvp.js index.html
+          git diff --cached --quiet || git commit -m "Count one other-drink bottle per person"
+          git push
