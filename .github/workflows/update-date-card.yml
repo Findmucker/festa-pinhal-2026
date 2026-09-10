@@ -1,0 +1,29 @@
+name: Update date card copy
+on:
+  push:
+    paths:
+      - '.github/workflows/update-date-card.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update date card
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('<div class="small">Marca já</div>', '<div class="small">Marca já, agora, imediatamente!!!</div>')
+          s=s.replace('<p><strong>Quarta-feira, 23 de setembro.</strong> É neste dia que nos vamos juntar para a tradicional Batatada. A festa é no Pinhal e fica mesmo perto de casa.</p>', '<p><strong>Quarta-feira, 23 de setembro.</strong> É neste dia que nos vamos juntar para a tradicional Batatada. A festa é no Pinhal e fica mesmo perto de casa do Edu caralho!! Fodasse assim é que é!</p>')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Update date card copy"
+          git push
