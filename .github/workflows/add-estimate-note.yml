@@ -1,0 +1,31 @@
+name: Add estimate note
+on:
+  push:
+    paths:
+      - '.github/workflows/add-estimate-note.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add note explaining estimates
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          note='''<div class="sync-note" style="margin-top:14px"><strong>Como são feitas as estimativas:</strong> contamos <strong>2 L de cerveja por pessoa</strong> e <strong>300 g de carne por pessoa</strong>. As outras bebidas não entram nesta estimativa: são apenas somadas por unidades/garrafas, conforme cada pessoa indicar. Os valores são apenas uma referência para ajudar a perceber o que já está assegurado e o que ainda falta.</div>'''
+          marker='<div id="other-items" class="other-items"></div>'
+          if note not in s and marker in s:
+              s=s.replace(marker, marker+'\n              '+note)
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Explain food and drink estimates"
+          git push
