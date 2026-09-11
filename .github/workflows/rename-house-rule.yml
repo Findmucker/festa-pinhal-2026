@@ -1,0 +1,42 @@
+name: Rename house rule label
+on:
+  push:
+    paths:
+      - '.github/workflows/rename-house-rule.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rename label
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          files=[Path('index.html'),Path('shared-rsvp.js')]
+          replacements={
+            'Regra da casa':'Estimativas',
+            'Regra da Casa':'Estimativas',
+            'REGRA DA CASA':'ESTIMATIVAS',
+            'regra da casa':'estimativas'
+          }
+          changed=False
+          for p in files:
+            if not p.exists(): continue
+            s=p.read_text()
+            n=s
+            for a,b in replacements.items(): n=n.replace(a,b)
+            if n!=s:
+              p.write_text(n)
+              changed=True
+          if not changed:
+            raise SystemExit('Label not found')
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html shared-rsvp.js
+          git diff --cached --quiet || git commit -m "Rename house rule to estimates"
+          git push
